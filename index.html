@@ -1,8 +1,111 @@
-<!doctype html>
-<html>
-  <head><meta charset="utf-8"><title>TEST</title></head>
-  <body style="font-family: Arial; padding: 40px;">
-    <h1>✅ GitHub Pages affiche bien index.html</h1>
-    <p>Si tu vois ça, le site fonctionne.</p>
-  </body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculateur d'XP</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .ligne {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 80px;
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Calculateur d'XP</h2>
+
+    <div class="ligne">
+        <span>Commun</span>
+        <input type="number" id="commun" value="0">
+    </div>
+
+    <div class="ligne">
+        <span>Rare</span>
+        <input type="number" id="rare" value="0">
+    </div>
+
+    <div class="ligne">
+        <span>Épique</span>
+        <input type="number" id="epique" value="0">
+    </div>
+
+    <div class="ligne">
+        <span>Légendaire</span>
+        <input type="number" id="legendaire" value="0">
+    </div>
+  
+<div class="ligne">
+        <span>Ultime</span>
+        <input type="number" id="ultime" value="0">
+    </div>
+
+  <div class="ligne">
+        <span>Mythique</span>
+        <input type="number" id="mythique" value="0">
+    </div>
+
+    <div class="total" id="total">
+        XP totale : 0
+    </div>
+</div>
+
+<script>
+    const xp = {
+        commun: 50,
+        rare: 200,
+        epique: 400,
+        legendaire: 800,
+        ultime: 1600,
+        mythique: 3200
+    };
+
+    function recalculerXP() {
+        let total = 0;
+
+        for (let rarete in xp) {
+            const quantite = Number(document.getElementById(rarete).value);
+            total += quantite * xp[rarete];
+        }
+
+        document.getElementById("total").textContent =
+            "XP totale : " + total;
+    }
+
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach(input => {
+        input.addEventListener("input", recalculerXP);
+    });
+</script>
+
+</body>
 </html>
